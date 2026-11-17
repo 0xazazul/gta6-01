@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solmar Bay — Open World Crime</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #10141a; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #hud { position: fixed; inset: 0; pointer-events: none; color: #eef1f5; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  #minimap { position: absolute; left: 16px; bottom: 16px; width: 190px; height: 190px; border: 2px solid rgba(255,255,255,.55); border-radius: 50%; background: #10141a; box-shadow: 0 2px 12px rgba(0,0,0,.6); }
+  #vitals { position: absolute; left: 16px; bottom: 216px; width: 190px; }
+  .bar { height: 10px; background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.4); margin-top: 4px; }
+  .bar > div { height: 100%; }
+  #health-fill { background: #3ec95a; width: 100%; }
+  #armor-fill { background: #4fa8e8; width: 0%; }
+  #top-right { position: absolute; top: 14px; right: 18px; text-align: right; font-weight: 700; }
+  #stars { font-size: 26px; letter-spacing: 2px; color: #8b93a3; }
+  #cash { font-size: 24px; color: #7ee081; margin-top: 2px; }
+  #clock { font-size: 18px; color: #eef1f5; margin-top: 2px; }
+  #objective { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); max-width: 46%; text-align: center; font-size: 17px; font-weight: 600; background: rgba(0,0,0,.45); padding: 6px 14px; border-radius: 6px; }
+  #banner { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); font-size: 30px; font-weight: 800; color: #ffd23a; opacity: 0; transition: opacity .3s; text-align: center; width: 80%; }
+  #speed { position: absolute; right: 18px; bottom: 16px; font-size: 26px; font-weight: 800; }
+  #hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); font-size: 14px; color: #dfe5ea; background: rgba(0,0,0,.4); padding: 4px 10px; border-radius: 4px; }
+  #screen { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(8,10,16,.55); color: #eef1f5; text-align: center; z-index: 5; }
+  #screen .panel { max-width: 640px; padding: 36px 44px; background: rgba(16,20,26,.88); border: 1px solid rgba(255,255,255,.18); border-radius: 10px; }
+  #screen-title { font-size: 52px; font-weight: 900; letter-spacing: 4px; color: #ffd23a; margin: 0 0 10px; }
+  #screen-lines p { font-size: 18px; line-height: 1.5; margin: 8px 0; color: #dfe5ea; }
+  #screen-prompt { font-size: 18px; font-weight: 700; color: #7ee081; margin-top: 18px; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js" } }
+</script>
+</head>
+<body>
+<canvas id="game" aria-label="Solmar Bay: an open-world crime game. Explore the city on foot or by car, steal cars, lose the cops and run missions."></canvas>
+<p id="status" role="status" aria-live="polite"></p>
+<div id="hud">
+  <canvas id="minimap" width="190" height="190"></canvas>
+  <div id="vitals">
+    <div class="bar"><div id="health-fill"></div></div>
+    <div class="bar"><div id="armor-fill"></div></div>
+  </div>
+  <div id="top-right">
+    <div id="stars">☆☆☆☆☆</div>
+    <div id="cash">$250</div>
+    <div id="clock">17:30</div>
+  </div>
+  <div id="objective"></div>
+  <div id="banner"></div>
+  <div id="speed"></div>
+  <div id="hint"></div>
+</div>
+<div id="screen">
+  <div class="panel">
+    <h1 id="screen-title">SOLMAR BAY</h1>
+    <div id="screen-lines"></div>
+    <div id="screen-prompt"></div>
+  </div>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
